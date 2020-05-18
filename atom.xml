@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>william&#39;s Blog</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yublog.com/"/>
+  <updated>2020-05-18T04:55:28.748Z</updated>
+  <id>http://yublog.com/</id>
+  
+  <author>
+    <name>william</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>DOM总结</title>
+    <link href="http://yublog.com/2020/04/23/DOM%E6%80%BB%E7%BB%93/"/>
+    <id>http://yublog.com/2020/04/23/DOM%E6%80%BB%E7%BB%93/</id>
+    <published>2020-04-22T16:00:00.000Z</published>
+    <updated>2020-05-18T04:55:28.748Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="javascript-的组成部分"><a href="#javascript-的组成部分" class="headerlink" title="javascript 的组成部分"></a>javascript 的组成部分</h2><ul><li>DOM (document object model) 文档对象模型</li><li>BOM (browers object model) 浏览器对象模型</li><li>ECMAScript JavaScript 的核心</li></ul><p>-！[DOM树] (<a href="https://upload-images.jianshu.io/upload_images/16749538-64b1ae6106efded7.png" target="_blank" rel="noopener">https://upload-images.jianshu.io/upload_images/16749538-64b1ae6106efded7.png</a>)</p><h2 id="DOM-节点"><a href="#DOM-节点" class="headerlink" title="DOM 节点"></a>DOM 节点</h2><h3 id="节点分类"><a href="#节点分类" class="headerlink" title="节点分类"></a>节点分类</h3><ol><li>元素节点：每个 HTML元素    </li><li>属性节点：HTML元素的属性</li><li>文本节点：HTML元素内的文本    </li><li>注释节点：注释 <!----></li><li>文档节点：整个文档document    </li></ol><h3 id="节点类型-—-nodeType"><a href="#节点类型-—-nodeType" class="headerlink" title="节点类型 — nodeType"></a>节点类型 — nodeType</h3><ul><li>元素节点：1    </li><li>属性节点：2</li><li>文本节点：3    </li><li>注释节点：8</li><li>文档节点：9</li></ul><h3 id="节点名称-—-nodeName打印结果"><a href="#节点名称-—-nodeName打印结果" class="headerlink" title="节点名称 — nodeName打印结果"></a>节点名称 — nodeName打印结果</h3><ul><li>元素节点：与标签名相同    </li><li>文本节点：为#text    </li><li>注释节点：为#comment</li><li>文档节点：为#document </li></ul><h2 id="DOM关系"><a href="#DOM关系" class="headerlink" title="DOM关系"></a>DOM关系</h2><h3 id="查找子级"><a href="#查找子级" class="headerlink" title="查找子级"></a>查找子级</h3><pre><code>- childNodes 子节点（包含所有节点：文本节点、注释节点、元素节点等）- children 子元素 （只包含元素节点）- firstChild 第0个子节点- firstElementChild 第0个子元素- lastChild 最后一个子节点- lastElementChild 最后一个子元素</code></pre><h3 id="查找兄弟级"><a href="#查找兄弟级" class="headerlink" title="查找兄弟级"></a>查找兄弟级</h3><pre><code>- nextSibling 下一个兄弟节点- nextElementSibling 下一个兄弟元素- previousSibling 上一个兄弟节点- previousElementSibling 上一个兄弟元素</code></pre><h3 id="查找父级"><a href="#查找父级" class="headerlink" title="查找父级"></a>查找父级</h3><pre><code>- parentNode 父节点- offsetParent 定位父级</code></pre><h3 id="nodeList和HTMLCollection的区别"><a href="#nodeList和HTMLCollection的区别" class="headerlink" title="nodeList和HTMLCollection的区别"></a>nodeList和HTMLCollection的区别</h3><p>nodeList由childNodes和querySelectorAll方法得到，可以使用forEach方法依次循环，而HTMLCollection由children、getElementsByTagName和getElementsByClassName得到，不能使用forEach方法；另外，HTMLCollection每次调用都会动态获取，即获取的内容跟随页面的变化而变化，nodeList中chilNodes可以动态获取，而querySelectorAll不能动态获取，每次获取的都是初始的内容。</p><h2 id="DOM-属性操作"><a href="#DOM-属性操作" class="headerlink" title="DOM 属性操作"></a>DOM 属性操作</h2><p>. 和 [] 都是ECMAScript中对对象的合法属性（W3C规定的元素属性）的操作，对象属性的值会被存在内存中, 想要直接获取存在文档中属性，或者想把一个属性设置在文档中我们需要使用DOM 的属性操作：</p><ul><li>el.attributes 元素所有属性的集合</li><li>el.getAttribute(“attr”) 获取属性</li><li>el.setAttribute(“attr”,”val”) 设置属性</li><li>el.removeAttribute(“attr”) 移出属性</li><li>el.hasAttribute(“attr”) 判断是否有这个属性<br>只要操作了innerHTML，元素的所有子元素上，存在内存中的事件和相关的属性都会丢失。如果希望元素的某些属性在操作了父级的innerHTML之后还存在，就需要把这个属性加在 DOM 中。存在内存中的数据可以是任意类型，但利用Attribute系列存在文档中，只能是String类型。</li></ul><h2 id="data-自定义属性"><a href="#data-自定义属性" class="headerlink" title="data 自定义属性"></a>data 自定义属性</h2><ul><li>在标签中定义data自定义属性：data-key=”value”;</li><li>在js操作该元素的 data 自定义属性：el.dataset<ul><li>获取：el.dataset.key</li><li>设置: el.dataset.key = “value”</li></ul></li></ul><h2 id="节点操作"><a href="#节点操作" class="headerlink" title="节点操作"></a>节点操作</h2><h3 id="创建节点"><a href="#创建节点" class="headerlink" title="创建节点"></a>创建节点</h3><p>语法：element document.createElement(“tagName”); 创建一个节点<br>参数：tagName 标签名称<br>返回值：创建好的节点</p><h3 id="向页面中添加节点"><a href="#向页面中添加节点" class="headerlink" title="向页面中添加节点"></a>向页面中添加节点</h3><ul><li>el.appendChild(node)  在元素的末尾添加一个子级</li><li>el.insertBefore(newNode,oldNode) 在 oldNode 前边添加入 newNode </li><li>在使用 appendChild 和 insertBefore时，如果添加是一个页面上已经存在的节点，会先从原位置删除，然后在添加到新的位置去。</li></ul><h3 id="替换节点"><a href="#替换节点" class="headerlink" title="替换节点"></a>替换节点</h3><ul><li>parent.replaceChild(newNode,oldNode) 替换子元素</li></ul><h3 id="删除节点"><a href="#删除节点" class="headerlink" title="删除节点"></a>删除节点</h3><ul><li>el parent.removeChild(el) 删除掉某个子元素</li><li>node.remove();</li></ul><h3 id="克隆节点"><a href="#克隆节点" class="headerlink" title="克隆节点"></a>克隆节点</h3><ul><li>node.cloneNode(deep) <ul><li>deep: 默认为false</li><li>deep 为 true, 克隆元素及属性，以及元素的内容和后代，但不会克隆事件</li><li>deep 为 false, 只克隆元素本身，及它的属性</li></ul></li></ul><h2 id="元素的尺寸获取"><a href="#元素的尺寸获取" class="headerlink" title="元素的尺寸获取"></a>元素的尺寸获取</h2><ul><li><p>offset</p><ul><li>offsetWidth  可视宽度 width+padding+border</li><li>offsetHeight 可视高度 height+padding+border</li><li>offsetLeft   距离定位父级的left坐标 </li><li>offsetTop    距离定位父级的top坐标</li></ul></li><li><p>client</p><ul><li>clientWidth  可视宽度 - border</li><li>clientHeight 可视高度 - border</li><li>clientTop    上边框宽度</li><li>clientLeft   左边框宽度 </li></ul></li><li><p>scroll</p><ul><li>scrollWidth   元素内容宽度，如果内容宽度小于元素宽度，scrollWidth = 元素宽度</li><li>scrollHeight  元素内容高度，如果内容高度小于元素高度，scrollHeight = 元素高度</li><li>scrollLeft    左右滚动距离</li><li>scrollTop     上下滚动距离</li></ul></li><li><p>getBoundingClientRect()（不兼容IE）</p><ul><li><p>left   元素左侧距离可视区左侧距离</p></li><li><p>top    元素顶部距离可视区顶部距离</p></li><li><p>right  元素右侧距离可视区左侧距离</p></li><li><p>bottom 元素底部距离可视区顶部距离</p></li><li><p>width  可视宽度 </p></li><li><p>height 可视高度</p><h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p>创建完元素后，把元素相关的属性和事件都添加好之后，再放到DOM中，性能会好很多！</p></li></ul></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      文档对象模型 (DOM) 是HTML和XML文档的编程接口。它提供了对文档的结构化的表述，并定义了一种方式可以使从程序中对该结构进行访问，从而改变文档的结构，样式和内容。DOM 将文档解析为一个由节点和对象（包含属性和方法的对象）组成的结构集合。简言之，它会将web页面和脚本或程序语言连接起来。
+    
+    </summary>
+    
+    
+      <category term="Web前端" scheme="http://yublog.com/categories/Web%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="JavaScript" scheme="http://yublog.com/categories/Web%E5%89%8D%E7%AB%AF/JavaScript/"/>
+    
+    
+      <category term="Web前端" scheme="http://yublog.com/tags/Web%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="JavaScript" scheme="http://yublog.com/tags/JavaScript/"/>
+    
+  </entry>
+  
+</feed>
